@@ -34,8 +34,17 @@ const cadastrarUsuario = (dados: Usuario):Usuario => {
     return dados
 }
 
-const listarUsuarios = (): Usuario[] => {
-    return lerArquivo() as Usuario[]
+const listarUsuarios = (filter?: string): Usuario[] => {
+    const bd = lerArquivo() as Usuario[]
+    
+    const usuario = bd.filter(usuario => {
+        if (!filter) {
+            return usuario.profissao === filter
+        }
+        return usuario
+    })
+
+    return usuario
 }
 
 const detalharUsuario = (cpf: string): Usuario => {
